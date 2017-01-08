@@ -1,0 +1,23 @@
+{
+  "name": "ws_nodejs",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "yooonsj"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "libs"
+  ],
+  "dependencies": {
+    "flatui": "*",
+    "bootstrap": "3.3.7"
+  }
+}

@@ -1,0 +1,10 @@
+var app        = require('../app');
+var mongoose   = require('mongoose');
+
+var conn = process.env.MONGO_CONN || 'mongodb://test:testtest@ds139428.mlab.com:39428/study';
+mongoose.connect(conn);
+
+var port = process.env.PORT || 4000;
+app.listen(port, function() {
+    console.log("Express serve has started on port " + port);
+});

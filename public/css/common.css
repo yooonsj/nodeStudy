@@ -1,0 +1,25 @@
+.login-wrap {
+    background-color: #1abc9c;
+    height: 100vh
+}
+.login-wrap h1 {
+    text-align: center;
+    padding: 100px 0 70px 0;
+    font-size: 70px;
+    margin: 0;
+}
+.login-wrap .login-form {
+    background-color: #edeff1;
+    padding: 24px 23px 20px;
+    position: relative;
+    width: 30%;
+    margin: auto
+}
+
+.main-wrap {
+
+}
+.main-wrap .intro-wrap {
+    padding: 100px 0 50px 0;
+    text-align: center;
+}
