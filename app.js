@@ -19,7 +19,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/views/');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
@@ -34,9 +34,11 @@ app.use(passport.session());
 
 // routes
 var mainRouter = require('./routes/main');
-var userRouter = require('./routes/login');
+var userRouter = require('./routes/user');
+var boardRouter = require('./routes/board');
 
 app.use('/', mainRouter);
-app.use('/', userRouter);
+app.use('/user', userRouter);
+app.use('/board', boardRouter);
 
 module.exports = app;

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../common/head %>
+</head>
+<body>
+    <% include ../common/header %>
+    <div class="board-wrap content-wrap">
+        <h1><%= subject %></h1>
+        <div class="board-contents">
+            <%= contents %>
+        </div>
+        <div class="text-right">
+            <a href="/board" class="btn btn-lg btn-default">목록</a>
+            <a href="/board/update?subject=<%= subject %>&contents=<%= contents %>" class="btn btn-lg btn-inverse">수정</a>
+            <a href="#" class="btn btn-lg btn-danger">삭제</a>
+        </div>
+    </div>
+    <% include ../common/footer %>
+</body>
+</html>

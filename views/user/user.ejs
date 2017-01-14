@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../common/head %>
+    </head>
+    <body>
+        <% include ../common/header %>
+        <div class="content-wrap">
+            <h1>User List</h1>
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>E-mail</th>
+                        <th>Nickname</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i = 0, len = users.length; i < len; i++) { %>
+                        <% var user = users[i] %>
+                        <tr>
+                            <td><%= user.email %> </td>
+                            <td><%= user.nickname %> </td>
+                            <td><%= user.reg_date %> </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        <% include ../common/footer %>
+    </body>
+</html>

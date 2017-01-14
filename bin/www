@@ -1,7 +1,7 @@
 var app        = require('../app');
 var mongoose   = require('mongoose');
 
-var conn = process.env.MONGO_CONN || 'mongodb://test:testtest@ds139428.mlab.com:39428/study';
+var conn = process.env.MONGODB || 'mongodb://test:testtest@ds139428.mlab.com:39428/study';
 mongoose.connect(conn);
 
 var port = process.env.PORT || 4000;

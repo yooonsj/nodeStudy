@@ -1,0 +1,138 @@
+<!-- views/partials/header.ejs -->
+<!-- Static navbar -->
+<nav class="navbar navbar-inverse navbar-embossed" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+            <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href="/">MEAN Stack Study</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <% if (session.passport) { %>
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href="/user">Users</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Study List <b class="caret"></b></a>
+                <span class="dropdown-arrow"></span>
+                <ul class="dropdown-menu">
+                    <li><a href="/board">Board</a></li>
+                    <!-- <li class="divider"></li> -->
+                </ul>
+            </li>
+        </ul>
+        <% } %>
+        <ul class="nav navbar-nav navbar-right">
+        <% if (!session.passport) { %>
+        <li><a href="#" data-toggle="modal" data-target="#LOGIN_MODAL">Login</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#JOIN_MODAL">Join</a></li>
+        <% } else { %>
+            <li>
+                <p class="navbar-text">안녕하세요! <%= session.passport.user.nickname %>님</p>
+            </li>
+            <li><a href="/logout">Logout</a></li>
+            <% } %>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+<!-- Login Modal -->
+<div class="modal fade" id="LOGIN_MODAL" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Login</h4>
+            </div>
+            <form id="LOGIN_form">
+                <div class="modal-body login-form">
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control login-field" value="" placeholder="Enter your email" id="LOGIN_form_email">
+                        <label class="login-field-icon fui-mail" for="LOGIN_form_email"></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control login-field" value="" placeholder="Password" id="LOGIN_form_password">
+                        <label class="login-field-icon fui-lock" for="LOGIN_form_password"></label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Close"/>
+                    <input type="submit" class="btn btn-primary" value="Login">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Join Modal -->
+<div class="modal fade" id="JOIN_MODAL" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Join</h4>
+            </div>
+            <form id="JOIN_form">
+                <div class="modal-body login-form">
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control login-field" value="" placeholder="Enter your email" id="JOIN_form_email">
+                        <label class="login-field-icon fui-mail" for="JOIN_form_email"></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="nickname" class="form-control login-field" value="" placeholder="Enter your nickname" id="JOIN_form_nickname">
+                        <label class="login-field-icon fui-user" for="JOIN_form_nickname"></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control login-field" value="" placeholder="Password" id="LOGIN_form_password">
+                        <label class="login-field-icon fui-lock" for="LOGIN_form_password"></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="repassword" class="form-control login-field" value="" placeholder="Re Password" id="LOGIN_form_repassword">
+                        <label class="login-field-icon fui-lock" for="LOGIN_form_repassword"></label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Close"/>
+                    <input type="submit" class="btn btn-primary" value="OK"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $('#LOGIN_form').submit(function() {
+            $.ajax({
+                url: '/login',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(msg) {
+                    if (msg) {
+                        alert(msg);
+                    } else {
+                        location.href = '/';
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $('#JOIN_form').submit(function() {
+            $.ajax({
+                url: '/join',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(msg) {
+                    if (msg) {
+                        alert(msg);
+                    } else {
+                        $('#JOIN_MODAL').modal('hide');
+                    }
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

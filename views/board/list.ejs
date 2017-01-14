@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../common/head %>
+</head>
+<body>
+    <% include ../common/header %>
+    <div class="board-wrap content-wrap">
+        <h1>Board</h1>
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Subject</th>
+                    <th>Writer</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><a href="/board/read?subject=test1&contents=test111">test1</a></td>
+                    <td>tester1</td>
+                    <td>2017.01.14</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><a href="/board/read?subject=test2&contents=test222">test2</a></td>
+                    <td>tester2</td>
+                    <td>2017.01.14</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><a href="/board/read?subject=test3&contents=test333">test3</a></td>
+                    <td>tester3</td>
+                    <td>2017.01.14</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-right">
+            <a href="/board/write" class="btn btn-lg btn-primary">글쓰기</a>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
+                <li class="active"><a href="#fakelink">1</a></li>
+                <li><a href="#fakelink">2</a></li>
+                <li><a href="#fakelink">3</a></li>
+                <li><a href="#fakelink">4</a></li>
+                <li><a href="#fakelink">5</a></li>
+                <li><a href="#fakelink">6</a></li>
+                <li><a href="#fakelink">7</a></li>
+                <li><a href="#fakelink">8</a></li>
+                <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
+            </ul>
+        </div>
+    </div>
+    <% include ../common/footer %>
+</body>
+</html>
