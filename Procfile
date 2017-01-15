@@ -1,1 +1,1 @@
-web: ./node_modules/bower/bin/bower instaill node ./bin/www
+web: ./node_modules/bower/bin/bower install node ./bin/www
