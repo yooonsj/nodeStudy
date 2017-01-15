@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var passportLocalMongoose = require('passport-local-mongoose');
 var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
 
@@ -34,7 +33,4 @@ User.methods.validPassword = function(password) {
     });
 };
 
-// User.plugin(passportLocalMongoose, {
-//     usernameField: 'email'
-// });
 module.exports = mongoose.model('User', User, 'user');
