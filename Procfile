@@ -1,2 +1,1 @@
-web: node ./bin/www
-worker: ./node_modules/bower/bin/bower install
+web: ./node_modules/bower/bin/bower install; node ./bin/www
