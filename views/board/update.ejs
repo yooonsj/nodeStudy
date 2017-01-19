@@ -1,27 +1,65 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <% include ../common/head %>
-</head>
-<body>
-    <% include ../common/header %>
-    <div class="board-wrap content-wrap">
-        <h1>수정</h1>
-        <form id="UPDATE_form">
-            <div class="modal-body login-form">
-                <div class="form-group">
-                    <input type="text" name="subject" class="form-control login-field" value="<%= subject %>" placeholder="Subject" id="UPDATE_subject">
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control login-field" name="contents" rows="10" placeholder="Contents"><%= contents %></textarea>
-                </div>
+<div class="modal fade" id="UPDATE_MODAL" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">글수정</h4>
             </div>
-            <div class="modal-footer">
-                <input type="button" class="btn btn-default" value="Cancel" onclick="location.href = '/board/read?subject=<%= subject %>&contents=<%= contents %>';"/>
-                <input type="submit" class="btn btn-primary" value="OK"/>
-            </div>
-        </form>
+            <form action="/board/update/<%= board.numId %>" id="UPDATE_form">
+                <div class="modal-body login-form">
+                    <div class="form-group">
+                        <input type="text" name="title" class="form-control login-field" value="<%= board.title %>" placeholder="Title" id="UPDATE_title">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control login-field" name="body" rows="10" placeholder="Contents"><%= board.body %></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" value="Cancel" data-dismiss="modal">
+                    <input type="button" id="UPDATE_delete_btn" class="btn btn-danger" value="Delete">
+                    <input type="submit" class="btn btn-primary" value="Update">
+                </div>
+            </form>
+        </div>
     </div>
-    <% include ../common/footer %>
-</body>
-</html>
+    <script type="text/javascript">
+        $(function() {
+            $('#UPDATE_form').submit(function() {
+                $.ajax({
+                    url: this.action,
+                    data: $(this).serialize(),
+                    method: 'put',
+                    success: function(msg) {
+                        console.log(msg);
+                        if (msg) {
+                            alert(msg);
+                        } else {
+                            $('#UPDATE_MODAL').modal('hide');
+                            location.reload();
+                        }
+                    }
+                });
+
+                return false;
+            });
+
+            $('#UPDATE_delete_btn').on('click', function() {
+                $.ajax({
+                    url: '/board/delete/<%= board.numId %>',
+                    method: 'delete',
+                    success: function(msg) {
+                        console.log(msg);
+                        if (msg) {
+                            alert(msg);
+                        } else {
+                            $('#UPDATE_MODAL').modal('hide');
+                            location.reload();
+                        }
+                    }
+                });
+
+                return false;
+            });
+        });
+    </script>
+</div>

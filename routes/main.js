@@ -4,11 +4,7 @@ var router = express.Router();
 var passport = require('passport');
 
 router.get('/', function(req, res) {
-    res.render('main/main', {session: req.session});
-});
-
-router.get('/login', function(req, res) {
-    res.render('', {view: 'login/login'});
+    res.render('main/main');
 });
 
 router.post('/login', function(req, res) {
@@ -52,6 +48,7 @@ router.post('/join', function(req, res) {
 
 router.get('/logout', function(req, res) {
     req.logout();
+    delete req.session.passport;
     res.redirect('/');
 });
 

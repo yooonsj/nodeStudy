@@ -16,31 +16,24 @@
                     <th>Date</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><a href="/board/read?subject=test1&contents=test111">test1</a></td>
-                    <td>tester1</td>
-                    <td>2017.01.14</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><a href="/board/read?subject=test2&contents=test222">test2</a></td>
-                    <td>tester2</td>
-                    <td>2017.01.14</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><a href="/board/read?subject=test3&contents=test333">test3</a></td>
-                    <td>tester3</td>
-                    <td>2017.01.14</td>
-                </tr>
+            <tbody id="LIST_tbody">
+                <% for(var i = 0, len = list.length; i < len; i++) { %>
+                    <% var item = list[i] %>
+                    <% var href = session.passport.user.email === item.author ? '/board/update' : '/board/read'; %>
+                    <% href += '/' + item.numId; %>
+                    <tr>
+                        <td><%= item.numId %></td>
+                        <td><a href="<%= href %>" class="js-subject"><%= item.title %></a></td>
+                        <td><%= item.author %></td>
+                        <td><%= formatDate(item.createdAt, 'YYYY.MM.DD') %></td>
+                    </tr>
+                <% } %>
             </tbody>
         </table>
         <div class="text-right">
-            <a href="/board/write" class="btn btn-lg btn-primary">글쓰기</a>
+            <a href="/board/write" id="LIST_write_btn" class="btn btn-lg btn-primary">글쓰기</a>
         </div>
-        <div class="text-center">
+        <!-- <div class="text-center">
             <ul class="pagination">
                 <li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
                 <li class="active"><a href="#fakelink">1</a></li>
@@ -53,8 +46,32 @@
                 <li><a href="#fakelink">8</a></li>
                 <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
             </ul>
-        </div>
+        </div> -->
     </div>
     <% include ../common/footer %>
+
+    <script type="text/javascript">
+        $(function() {
+            $('#LIST_write_btn').on('click', function() {
+                $.ajax({
+                    url: this.href,
+                    success: function(data) {
+                        $(data).modal();
+                    }
+                })
+                return false;
+            });
+
+            $('#LIST_tbody').on('click', '.js-subject', function() {
+                $.ajax({
+                    url: this.href,
+                    success: function(data) {
+                        $(data).modal();
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
 </body>
 </html>

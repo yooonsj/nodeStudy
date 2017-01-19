@@ -10,7 +10,6 @@ router.get('/', function(req, res) {
 
         if (users) {
             res.render('user/user', {
-                session: req.session,
                 users: users
             });
         }

@@ -5,6 +5,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var logger = require('morgan');
 var flash = require('connect-flash');
+var moment = require('moment');
 
 var app        = express();
 
@@ -37,8 +38,22 @@ var mainRouter = require('./routes/main');
 var userRouter = require('./routes/user');
 var boardRouter = require('./routes/board');
 
+app.use(function(req, res, next) {
+    var session;
+    if (req.session) {
+      session = req.session;
+    }
+
+    res.locals.session = session;
+    next();
+});
+
 app.use('/', mainRouter);
 app.use('/user', userRouter);
 app.use('/board', boardRouter);
+
+app.locals.formatDate = function(date, pattern) {
+    return moment(date).format(pattern);
+};
 
 module.exports = app;
